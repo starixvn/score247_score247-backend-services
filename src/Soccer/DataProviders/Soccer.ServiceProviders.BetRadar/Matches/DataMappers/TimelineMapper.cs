@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Score247.Shared.Enumerations;
+using Soccer.Core._Shared.Enumerations;
 using Soccer.Core.Matches.Models;
 using Soccer.Core.Shared.Enumerations;
 using Soccer.Core.Teams.Models;
@@ -38,6 +39,8 @@ namespace Soccer.DataProviders.SportRadar.Matches.DataMappers
                 GetGoalAssist(timelineDto),
                 GetPlayer(timelineDto.player),
                 timelineDto.injury_time_announced,
+                Enumeration.FromDisplayName<OutcomeType>(timelineDto.outcome),
+                Enumeration.FromDisplayName<DescriptionType>(timelineDto.description),
                 Enumerable.Empty<Commentary>(),
                 GetPlayer(timelineDto.player_out),
                 GetPlayer(timelineDto.player_in));

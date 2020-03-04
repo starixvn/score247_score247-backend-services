@@ -21,7 +21,8 @@
                 EventType.MatchEnded.Value,
                 EventType.InjuryTimeShown.Value,
                 EventType.PenaltyMissed.Value,
-                EventType.Substitution.Value
+                EventType.Substitution.Value,
+                EventType.VarOver.Value
            };
 
         private static readonly EventType[] MainEventTypes = {
@@ -33,7 +34,8 @@
             EventType.PenaltyShootout,
             EventType.BreakStart,
             EventType.MatchEnded,
-            EventType.Substitution
+            EventType.Substitution,
+            EventType.VarOver
         };
 
         private static readonly EventType[] NotifiableEventTypes = {

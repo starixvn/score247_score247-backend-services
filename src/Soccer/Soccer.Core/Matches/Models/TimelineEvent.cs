@@ -6,6 +6,7 @@
     using Newtonsoft.Json;
     using Score247.Shared.Base;
     using Shared.Enumerations;
+    using Soccer.Core._Shared.Enumerations;
     using Soccer.Core.Teams.Models;
 
     [MessagePackObject(keyAsPropertyName: true)]
@@ -29,6 +30,8 @@
             Player assist,
             Player player,
             int injuryTimeAnnounced,
+            OutcomeType outcome,
+            DescriptionType description,
             IEnumerable<Commentary> commentaries,
             Player playerOut,
             Player playerIn) : base(id)
@@ -126,6 +129,12 @@
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public Player AwayShootoutPlayer { get; set; }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public OutcomeType Outcome { get; set; }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public DescriptionType Description { get; set; }
 
         public bool IsAwayShootoutScored { get; set; }
 
