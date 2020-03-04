@@ -2,9 +2,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
 using Soccer.NotificationPublishers._Shared.Configuration;
-using Soccer.NotificationServices.AppCenter._Shared.Configuration;
-using Soccer.NotificationServices.AppCenter.Matches;
 using Soccer.NotificationServices.Matches;
+using Soccer.NotificationServices.OneSignal._Shared.Configuration;
+using Soccer.NotificationServices.OneSignal.Matches;
 
 namespace Soccer.NotificationPublishers._Shared.Middlewares
 {
@@ -12,11 +12,11 @@ namespace Soccer.NotificationPublishers._Shared.Middlewares
     {
         public static void AddServices(this IServiceCollection services, IConfiguration configuration, IAppSettings appSettings)
         {
-            var appCenterSettings = new AppCenterSettings();
-            configuration.GetSection("PushServices:AppCenter").Bind(appCenterSettings);
-            services.AddSingleton<IAppCenterSettings>(appCenterSettings);
+            var oneSignalSettings = new OneSignalSettings();
+            configuration.GetSection("PushServices:OneSignal").Bind(oneSignalSettings);
+            services.AddSingleton<IOneSignalSettings>(oneSignalSettings);
 
-            services.AddSingleton(RestService.For<IPushApi>(appCenterSettings.ServiceUrl));
+            services.AddSingleton(RestService.For<IPushApi>(oneSignalSettings.ServiceUrl));
             services.AddSingleton<IMatchNotificationService, MatchNotificationService>();
         }
     }
