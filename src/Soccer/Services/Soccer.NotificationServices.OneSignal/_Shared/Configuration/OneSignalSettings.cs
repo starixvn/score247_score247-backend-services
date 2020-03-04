@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Soccer.NotificationServices.OneSignal._Shared.Configuration
+﻿namespace Soccer.NotificationServices.OneSignal._Shared.Configuration
 {
-    public interface IOneSignalSettings 
+    public interface IOneSignalSettings
     {
         string ServiceUrl { get; set; }
 #pragma warning restore S3996 // URI properties should not be strings
+
+        string AppId { get; set; }
 
         string ApiKey { get; set; }
     }
@@ -15,6 +13,8 @@ namespace Soccer.NotificationServices.OneSignal._Shared.Configuration
     public class OneSignalSettings : IOneSignalSettings
     {
         public string ServiceUrl { get; set; }
+
+        public string AppId { get; set; }
 
         public string ApiKey { get; set; }
     }
