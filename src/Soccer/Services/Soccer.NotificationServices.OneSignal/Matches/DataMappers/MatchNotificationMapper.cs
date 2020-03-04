@@ -7,15 +7,12 @@ namespace Soccer.NotificationServices.OneSignal.Matches.DataMappers
     public static class MatchNotificationMapper
     {
         public static PushDto MapPush(string appId, MatchEventNotification eventNotification)
+        => new PushDto
         {
-
-            return new PushDto
-            {
-                app_id = appId,
-                headings = new List<ContentDto> { new ContentDto { en= eventNotification.Title } },
-                contents = new List<ContentDto> { new ContentDto { en = eventNotification.Content } },
-                include_player_ids = eventNotification.UserIds
-            };
-        }
+            app_id = appId,
+            headings = new Dictionary<string, string> { { "en", eventNotification.Title } },
+            contents = new Dictionary<string, string> { { "en", eventNotification.Content } },
+            include_player_ids = eventNotification.UserIds
+        };
     }
 }

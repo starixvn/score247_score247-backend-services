@@ -6,9 +6,9 @@ namespace Soccer.NotificationServices.OneSignal.Dtos
     {
         public string app_id { get; set; }
 
-        public IList<ContentDto> headings { get; set; }
+        public Dictionary<string, string> headings { get; set; }
 
-        public IList<ContentDto> contents { get; set; }
+        public Dictionary<string, string> contents { get; set; }
 
         public string[] include_player_ids { get; set; }
     }
