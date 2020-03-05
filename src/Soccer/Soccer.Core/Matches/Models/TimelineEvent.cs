@@ -50,6 +50,8 @@
             Assist = assist;
             Player = player;
             InjuryTimeAnnounced = injuryTimeAnnounced;
+            Outcome = outcome;
+            Description = description;
             Commentaries = commentaries;
             PlayerOut = playerOut;
             PlayerIn = playerIn;
