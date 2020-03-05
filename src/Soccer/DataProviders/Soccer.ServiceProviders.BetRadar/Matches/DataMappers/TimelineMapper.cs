@@ -39,8 +39,8 @@ namespace Soccer.DataProviders.SportRadar.Matches.DataMappers
                 GetGoalAssist(timelineDto),
                 GetPlayer(timelineDto.player),
                 timelineDto.injury_time_announced,
-                Enumeration.FromDisplayName<OutcomeType>(timelineDto.outcome),
-                Enumeration.FromDisplayName<DescriptionType>(timelineDto.description),
+                GetOutcome(timelineDto.outcome),
+                GetDescription(timelineDto.description),
                 Enumerable.Empty<Commentary>(),
                 GetPlayer(timelineDto.player_out),
                 GetPlayer(timelineDto.player_in));
@@ -119,6 +119,26 @@ namespace Soccer.DataProviders.SportRadar.Matches.DataMappers
                 }
                 timeline.PenaltyStatus = timelineDto.status;
             }
+        }
+
+        private static OutcomeType GetOutcome(string outcome)
+        {
+            if (string.IsNullOrWhiteSpace(outcome))
+            {
+                return null;
+            }
+
+            return Enumeration.FromDisplayName<OutcomeType>(outcome);
+        }
+
+        private static DescriptionType GetDescription(string description)
+        {
+            if (string.IsNullOrWhiteSpace(description))
+            {
+                return null;
+            }
+
+            return Enumeration.FromDisplayName<DescriptionType>(description);
         }
     }
 }
