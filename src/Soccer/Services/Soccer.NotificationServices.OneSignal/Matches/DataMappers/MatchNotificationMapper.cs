@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Soccer.Core._Shared.Enumerations;
 using Soccer.Core.Notification.Models;
 using Soccer.NotificationServices.OneSignal.Dtos;
 
@@ -12,7 +13,13 @@ namespace Soccer.NotificationServices.OneSignal.Matches.DataMappers
             app_id = appId,
             headings = new Dictionary<string, string> { { "en", eventNotification.Title } },
             contents = new Dictionary<string, string> { { "en", eventNotification.Content } },
-            include_player_ids = eventNotification.UserIds
+            include_player_ids = eventNotification.UserIds,
+            data = new Dictionary<string, string>
+            {
+                  { "id", eventNotification.MatchId },
+                  { nameof(eventNotification.SportId), eventNotification.SportId.ToString() },
+                  { "type", NotificationType.MatchValue.ToString() }
+            }
         };
     }
 }

@@ -11,5 +11,7 @@ namespace Soccer.NotificationServices.OneSignal.Dtos
         public Dictionary<string, string> contents { get; set; }
 
         public string[] include_player_ids { get; set; }
+
+        public Dictionary<string, string> data { get; set; }
     }
 }
