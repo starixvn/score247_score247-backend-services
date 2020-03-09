@@ -19,7 +19,9 @@ namespace Soccer.EventProcessors.Notifications.Models
         
         public override string Content(string language = Language.English)
         => Timeline.Outcome.IsGoalOutcome() 
-            ? $"{VAROutcomeDisplay}{Environment.NewLine}{HomeTeam.Name} {MatchResult.HomeScore}{TeamSeparator}{MatchResult.AwayScore} {AwayTeam.Name}" 
+            ? $"{VAROutcomeDisplay}" +
+                $"{NewLine}" +
+                $"{HomeTeam.Name} {MatchResult.HomeScore}{TeamSeparator}{MatchResult.AwayScore} {AwayTeam.Name}" 
             : VAROutcomeDisplay;
 
         public override string Title(string language = Language.English)
