@@ -80,12 +80,15 @@
             var needMap = tl != null
                                 && tl.Type != null
                                 && OddChangeEventIds.Contains(tl.Type.Value)
-                                && tl.PeriodType != null
-                                && (tl.PeriodType == PeriodType.RegularPeriod
-                                        || tl.PeriodType.DisplayName == pause);
+                                && IsRegularOrPausePeriod(tl);
 
             return needMap;
         }
+
+        public static bool IsRegularOrPausePeriod(TimelineEvent tl)
+            => tl.PeriodType != null
+               && (tl.PeriodType == PeriodType.RegularPeriod
+                || tl.PeriodType.DisplayName == pause);
 
 #pragma warning restore S1067 // Expressions should not be too complex
 
