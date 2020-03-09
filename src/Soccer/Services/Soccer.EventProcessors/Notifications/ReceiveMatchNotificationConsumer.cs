@@ -72,8 +72,8 @@ namespace Soccer.EventProcessors.Notifications
 
                 return;
             }
-
-            if (await notificationDeduper.IsProcessedAsync(message.MatchId, notification.Content()))
+           
+            if (await notificationDeduper.IsProcessedAsync(message.MatchId, $"{notification.Title()} {notification.Content()}"))
             {
                 return;
             }
