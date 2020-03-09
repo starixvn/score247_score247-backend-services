@@ -1,4 +1,5 @@
-﻿using Soccer.Core._Shared.Resources;
+﻿using System;
+using Soccer.Core._Shared.Resources;
 using Soccer.Core.Matches.Extensions;
 using Soccer.Core.Matches.Models;
 using Soccer.Core.Shared.Enumerations;
@@ -18,10 +19,12 @@ namespace Soccer.EventProcessors.Notifications.Models
         
         public override string Content(string language = Language.English)
         => Timeline.Outcome.IsGoalOutcome() 
-            ? $"{HomeTeam.Name} {MatchResult.HomeScore}{TeamSeparator}{MatchResult.AwayScore} {AwayTeam.Name}" 
-            : $"{LanguageResources.GetString(Timeline.Outcome.DisplayName)}";
+            ? $"{VAROutcomeDisplay}{Environment.NewLine}{HomeTeam.Name} {MatchResult.HomeScore}{TeamSeparator}{MatchResult.AwayScore} {AwayTeam.Name}" 
+            : VAROutcomeDisplay;
 
         public override string Title(string language = Language.English)
-        => $"VAR - {LanguageResources.GetString(Timeline.Outcome.DisplayName)} {TeamReceived.Name}";
+        => $"VAR ({Timeline.MatchTime}')";
+
+        private string VAROutcomeDisplay => $"{LanguageResources.GetString(Timeline.Outcome.DisplayName)} {TeamReceived.Name}";
     }
 }
