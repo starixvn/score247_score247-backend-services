@@ -183,4 +183,22 @@
   <data name="YellowRedCardPostfix" xml:space="preserve">
     <value>2nd yellow card and is off!</value>
   </data>
+  <data name="goal" xml:space="preserve">
+    <value>Goal for</value>
+  </data>
+  <data name="no_goal" xml:space="preserve">
+    <value>No goal for</value>
+  </data>
+  <data name="no_penalty" xml:space="preserve">
+    <value>No penalty for</value>
+  </data>
+  <data name="no_red_card" xml:space="preserve">
+    <value>No red card for</value>
+  </data>
+  <data name="penalty" xml:space="preserve">
+    <value>Penalty for</value>
+  </data>
+  <data name="red_card" xml:space="preserve">
+    <value>Red card for</value>
+  </data>
 </root>

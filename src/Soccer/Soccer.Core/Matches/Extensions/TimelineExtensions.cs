@@ -43,7 +43,8 @@
             EventType.ScoreChange,
             EventType.RedCard,
             EventType.YellowRedCard,
-            EventType.MatchEnded
+            EventType.MatchEnded,
+            EventType.VarOver
         };
 
         public static List<byte> ReprocessScoreEventTypes { get; }

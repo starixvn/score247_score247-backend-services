@@ -56,7 +56,7 @@ namespace Soccer.EventProcessors.Notifications
         {
             var message = context.Message;
 
-            //TODO group users by language and OS (iOS | Android)
+            //TODO group users by language
             var favoriteUserIds = await GetUserFavoriteIdsAsync(message.MatchId);
             
             if (favoriteUserIds?.Any() == false)

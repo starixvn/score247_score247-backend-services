@@ -17,7 +17,8 @@ namespace Soccer.EventProcessors.Notifications.Models
             { EventType.YellowRedCard, typeof(YellowRedCardNotification)  },
             { EventType.ScoreChange, typeof(ScoreChangeNotification)  },
             { EventType.ScoreChangeByOwnGoal, typeof(ScoreChangeNotification)  },
-            { EventType.ScoreChangeByPenalty, typeof(ScoreChangeNotification)  }
+            { EventType.ScoreChangeByPenalty, typeof(ScoreChangeNotification)  },
+            { EventType.VarOver, typeof(VAROverNotification)  }
         };
 
         public static TimelineNotification CreateInstance(

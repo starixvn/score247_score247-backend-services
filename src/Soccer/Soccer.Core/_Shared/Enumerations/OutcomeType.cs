@@ -18,14 +18,11 @@
 
         //VAR Check Red Card
         public static readonly OutcomeType RedCard = new OutcomeType(3, "red_card");
-
-        //VAR Call Stage
+     
         public static readonly OutcomeType NoGoal = new OutcomeType(4, "no_goal");
-
-        //VAR Call Overturned
+      
         public static readonly OutcomeType NoPenalty = new OutcomeType(5, "no_penalty");
 
-        //VAR Call Overturned
         public static readonly OutcomeType NoRedCard = new OutcomeType(5, "no_red_card");
 
         public OutcomeType()
@@ -42,6 +39,7 @@
             get
             {
                 var removedSeperatorName = string.Join(SpaceString, DisplayName.Split(OutcomeSeperateChar));
+
                 return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(removedSeperatorName);
             }
         }

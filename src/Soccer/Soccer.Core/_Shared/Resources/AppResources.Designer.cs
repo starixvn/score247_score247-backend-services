@@ -88,6 +88,15 @@ namespace Soccer.Core._Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Goal for.
+        /// </summary>
+        public static string goal {
+            get {
+                return ResourceManager.GetString("goal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Asian Handicap.
         /// </summary>
         public static string Handicap {
@@ -142,6 +151,33 @@ namespace Soccer.Core._Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No goal for.
+        /// </summary>
+        public static string no_goal {
+            get {
+                return ResourceManager.GetString("no_goal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No penalty for.
+        /// </summary>
+        public static string no_penalty {
+            get {
+                return ResourceManager.GetString("no_penalty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No red card for.
+        /// </summary>
+        public static string no_red_card {
+            get {
+                return ResourceManager.GetString("no_red_card", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 1x2.
         /// </summary>
         public static string OneXTwo {
@@ -178,6 +214,15 @@ namespace Soccer.Core._Shared.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Penalty for.
+        /// </summary>
+        public static string penalty {
+            get {
+                return ResourceManager.GetString("penalty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Penalty shoot-out:.
         /// </summary>
         public static string PenaltyShootout {
@@ -192,6 +237,15 @@ namespace Soccer.Core._Shared.Resources {
         public static string PlayerToBeDefined {
             get {
                 return ResourceManager.GetString("PlayerToBeDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Red card for.
+        /// </summary>
+        public static string red_card {
+            get {
+                return ResourceManager.GetString("red_card", resourceCulture);
             }
         }
         
