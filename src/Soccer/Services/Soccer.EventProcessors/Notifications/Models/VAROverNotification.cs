@@ -23,7 +23,7 @@ namespace Soccer.EventProcessors.Notifications.Models
             : VAROutcomeDisplay;
 
         public override string Title(string language = Language.English)
-        => $"VAR ({Timeline.MatchTime}')";
+        => $"VAR {MatchTimeDisplay}";
 
         private string VAROutcomeDisplay => $"{LanguageResources.GetString(Timeline.Outcome.DisplayName)} {TeamReceived.Name}";
     }
