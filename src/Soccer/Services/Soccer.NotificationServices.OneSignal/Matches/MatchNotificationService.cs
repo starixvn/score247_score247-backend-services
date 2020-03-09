@@ -13,7 +13,7 @@ namespace Soccer.NotificationServices.OneSignal.Matches
     public interface IPushApi
     {
         [Post("/notifications")]
-        Task Push([Header("authorization")] string apiKey, [Body] PushDto push);
+        Task Push([Header("authorization")] string apiKey, [Body] PushDto pushMessage);
     }
 
     public class MatchNotificationService : IMatchNotificationService
