@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using Soccer.Core._Shared.Enumerations;
 using Soccer.Core.Notification.Models;
+using Soccer.Core.Shared.Enumerations;
+using Soccer.NotificationServices.OneSignal._Shared.Extensions;
 using Soccer.NotificationServices.OneSignal.Dtos;
 
 namespace Soccer.NotificationServices.OneSignal.Matches.DataMappers
@@ -11,8 +13,8 @@ namespace Soccer.NotificationServices.OneSignal.Matches.DataMappers
         => new PushDto
         {
             app_id = appId,
-            headings = new Dictionary<string, string> { { "en", eventNotification.Title } },
-            contents = new Dictionary<string, string> { { "en", eventNotification.Content } },
+            headings = new Dictionary<string, string> { { Language.en_US.ToOneSignalFormat(), eventNotification.Title } },
+            contents = new Dictionary<string, string> { { Language.en_US.ToOneSignalFormat(), eventNotification.Content } },
             include_player_ids = eventNotification.UserIds,
             data = new Dictionary<string, string>
             {

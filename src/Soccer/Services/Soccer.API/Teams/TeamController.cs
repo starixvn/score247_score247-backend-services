@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Soccer.API.Teams.Requests;
 using Soccer.Core.Matches.Models;
+using Soccer.Core.Shared.Enumerations;
 using Soccer.Core.Teams.Models;
 
 namespace Soccer.API.Teams
@@ -25,7 +26,7 @@ namespace Soccer.API.Teams
         public async Task<IEnumerable<MatchSummary>> GetHeadToHeads(
             string homeTeamId,
             string awayTeamId,
-            string language = "en-US")
+            string language = Language.English)
             => await mediator.Send(new HeadToHeadRequest(homeTeamId, awayTeamId, language));
 
         /// <summary>
@@ -36,27 +37,27 @@ namespace Soccer.API.Teams
         public async Task<IEnumerable<MatchSummary>> GetTeamResults(
             string teamId,
             [FromQuery]string opponentTeamId = "",
-            string language = "en-US")
+            string language = Language.English)
             => await mediator.Send(new TeamResultRequest(teamId, opponentTeamId, language));
 
         [HttpGet]
         [Route("trending")]
         public async Task<IEnumerable<TeamProfile>> GetTrendingTeams(
-            string language = "en-US")
+            string language = Language.English)
             => await mediator.Send(new TrendingTeamsRequest(language));
 
         [HttpGet]
         [Route("search")]
         public async Task<IEnumerable<TeamProfile>> GetTrendingTeams(
             string keyword,
-            string language = "en-US")
+            string language = Language.English)
             => await mediator.Send(new SearchTeamByNameRequest(keyword, language));
 
         [HttpGet]
         [Route("{teamId}/matches")]
         public async Task<IEnumerable<MatchSummary>> GetMatches(
             string teamId,
-            string language = "en-US")
+            string language = Language.English)
             => await mediator.Send(new MatchesByTeamRequest(teamId, language));
     }
 }

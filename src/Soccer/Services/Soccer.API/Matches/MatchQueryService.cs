@@ -44,7 +44,6 @@ namespace Soccer.API.Matches
         private const string MatchInfoCacheKey = "MatchQuery_MatchInfoCacheKey";
         private const string MatchListCacheKey = "MatchQuery_MatchListCacheKey";
         private const string MatchCommentaryCacheKey = "MatchQuery_MatchCommentaryCacheKey";
-        private const string MatchLineupCacheKey = "MatchQuery_MatchLineupCacheKey";
         private const string FormatDate = "yyyyMMdd-hhmmss";
         private readonly IDynamicRepository dynamicRepository;
         private readonly ICacheManager cacheManager;
