@@ -1,5 +1,4 @@
-﻿using System;
-using Soccer.Core._Shared.Resources;
+﻿using Soccer.Core._Shared.Resources;
 using Soccer.Core.Matches.Extensions;
 using Soccer.Core.Matches.Models;
 using Soccer.Core.Shared.Enumerations;
