@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MessagePack;
+using Soccer.Core._Shared.Enumerations;
 using Soccer.Core.Matches.Models;
 using Soccer.Core.Shared.Enumerations;
 using Soccer.Core.Teams.Models;
@@ -24,6 +25,8 @@ namespace Soccer.API.Matches.Models
             StoppageTime = timelineEvent.StoppageTime;
             Commentaries = timelineEvent.Commentaries;
             GoalScorer = timelineEvent.GoalScorer;
+            Outcome = timelineEvent.Outcome;
+            Description = timelineEvent.Description;
             IsPenaltyShootOutScored = (timelineEvent.IsHome && timelineEvent.IsHomeShootoutScored)
                                      || (!timelineEvent.IsHome && timelineEvent.IsAwayShootoutScored);
         }
@@ -43,6 +46,10 @@ namespace Soccer.API.Matches.Models
         public IEnumerable<Commentary> Commentaries { get; }
 
         public GoalScorer GoalScorer { get; }
+
+        public OutcomeType Outcome { get; }
+
+        public DescriptionType Description { get; }
 
         public bool IsPenaltyShootOutScored { get; }
 
