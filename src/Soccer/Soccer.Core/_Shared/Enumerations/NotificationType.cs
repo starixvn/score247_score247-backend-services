@@ -1,7 +1,9 @@
-﻿using Score247.Shared.Enumerations;
+﻿using MessagePack;
+using Score247.Shared.Enumerations;
 
 namespace Soccer.Core._Shared.Enumerations
 {
+    [MessagePackObject(keyAsPropertyName: true)]
     public class NotificationType : Enumeration
     {
         public const byte MatchValue = 1;

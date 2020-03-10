@@ -9,12 +9,18 @@ namespace Soccer.Database.Favorites.Commands
         {
             SportId = Sport.Soccer.Value;
             UserId = userFavorite.UserId;
+            DeviceId = userFavorite.DeviceId;
+            PushService = userFavorite.PushService;
             Favorites = ToJsonString(userFavorite.Favorites);
         }
 
         public int SportId { get; }
 
         public string UserId { get; }
+
+        public string DeviceId { get; }
+
+        public string PushService { get; }
 
         public string Favorites { get; }
 
