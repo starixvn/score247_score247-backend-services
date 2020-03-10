@@ -7,10 +7,15 @@ namespace Soccer.Core.Models.Favorites
     [MessagePackObject(keyAsPropertyName: true)]
     public class UserFavorite
     {
-        public UserFavorite(string userId, string deviceId, IList<Favorite> favorites, string pushService = PushServiceProvider.OneSignalName)
+        public UserFavorite(
+            string userId, 
+            string deviceId, 
+            IList<Favorite> favorites, 
+            string platform, 
+            string pushService = PushServiceProvider.OneSignalName)
         {
             UserId = userId;
-            PushService = pushService;
+            PushService = pushService ?? PushServiceProvider.OneSignalName;
             DeviceId = deviceId;
             Favorites = favorites;
         }
