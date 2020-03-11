@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Fanex.Data.Repository;
 using Fanex.Logging;
@@ -31,7 +32,6 @@ namespace Soccer.API.Favorites
 
             return dynamicRepository.ExecuteAsync(new InsertOrUpdateFavoriteCommand(userFavorite));
         }
-
 
         public Task<int> RemoveFavorite(UserFavorite userFavorite)
         {

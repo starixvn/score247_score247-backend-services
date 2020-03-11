@@ -39,9 +39,14 @@ namespace Soccer.API.Favorites
             {
                 return false;
             }
+            
+            var removed = request.SyncUserFavorite.RemovedUserFavorite?.Favorites?.Any() == true
+                ? await favoriteCommandService.RemoveFavorite(request.SyncUserFavorite.RemovedUserFavorite)
+                : 0;
 
-            var removed = await favoriteCommandService.RemoveFavorite(request.SyncUserFavorite.RemovedUserFavorite);
-            var added = await favoriteCommandService.AddFavorite(request.SyncUserFavorite.AddedUserFavorite);
+            var added = request.SyncUserFavorite.AddedUserFavorite?.Favorites?.Any() == true
+                ? await favoriteCommandService.AddFavorite(request.SyncUserFavorite.AddedUserFavorite)
+                : 0;
 
             return (added + removed) > 0;
         }
