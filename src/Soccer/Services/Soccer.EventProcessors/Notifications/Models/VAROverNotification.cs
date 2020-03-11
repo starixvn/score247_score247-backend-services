@@ -15,12 +15,12 @@ namespace Soccer.EventProcessors.Notifications.Models
           Team away,
           byte matchTime,
           MatchResult matchResult) : base(languageResources, timeline, home, away, matchTime, matchResult) { }
-        
+
         public override string Content(string language = Language.English)
-        => Timeline.Outcome.IsGoalOutcome() 
+        => Timeline.Outcome.IsGoalOutcome()
             ? $"{VAROutcomeDisplay}" +
                 $"{NewLine}" +
-                $"{HomeTeam.Name} {MatchResult.HomeScore}{TeamSeparator}{MatchResult.AwayScore} {AwayTeam.Name}" 
+                $"{HomeTeam.Name} {MatchResult.HomeScore}{TeamSeparator}{MatchResult.AwayScore} {AwayTeam.Name}"
             : VAROutcomeDisplay;
 
         public override string Title(string language = Language.English)

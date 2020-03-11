@@ -90,9 +90,9 @@
         //video_assistant_referee_over
         public static readonly EventType VarOver = new EventType(28, "video_assistant_referee_over");
 
-
-        // custom event 
+        // custom event
         public static readonly EventType ScoreChangeByPenalty = new EventType(29, "score_change_by_penalty");
+
         public static readonly EventType ScoreChangeByOwnGoal = new EventType(30, "score_change_by_owngoal");
 
         public EventType()
@@ -123,5 +123,7 @@
         public bool IsYellowCard() => this == YellowCard;
 
         public bool IsInjuryTime() => this == InjuryTimeShown;
+
+        public bool IsVarOver() => this == VarOver;
     }
 }

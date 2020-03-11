@@ -89,6 +89,11 @@ namespace Soccer.EventProcessors.Matches
                 await messageBus.Publish<IInjuryTimeEventMessage>(new InjuryTimeEventMessage(matchEvent));
             }
 
+            if (matchEvent.Timeline.Type.IsVarOver())
+            {
+                await messageBus.Publish<IVarOverEventMessage>(new VarOverEventMessage(matchEvent));
+            }
+
             await messageBus.Publish<IMatchEventProcessedMessage>(new MatchEventProcessedMessage(matchEvent));
         }
 
