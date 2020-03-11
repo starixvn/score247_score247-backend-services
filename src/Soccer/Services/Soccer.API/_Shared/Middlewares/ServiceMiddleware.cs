@@ -32,7 +32,6 @@ namespace Soccer.API.Shared.Middlewares
             services.AddScoped<IMatchQueryService, MatchQueryService>();
             services.AddScoped<IOddsQueryService, OddsQueryService>();
             services.AddScoped<ILeagueQueryService, LeagueQueryService>();
-            services.AddScoped<ILeagueCommandService, LeagueCommandService>();
             services.AddScoped<ITeamQueryService, TeamQueryService>();
 
             services.AddSingleton<Func<DateTimeOffset>>(() => DateTimeOffset.Now);

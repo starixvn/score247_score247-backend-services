@@ -15,18 +15,14 @@ namespace Soccer.API.Leagues
         IRequestHandler<MatchesByLeagueRequest, IEnumerable<MatchSummary>>,
         IRequestHandler<LeagueTableRequest, LeagueTable>,
         IRequestHandler<CountryLeaguesRequest, IEnumerable<League>>,
-        IRequestHandler<LeagueGroupsRequest, IEnumerable<LeagueGroupStage>>,
-        IRequestHandler<UpdateLeagueAbbreviationRequest, bool>
+        IRequestHandler<LeagueGroupsRequest, IEnumerable<LeagueGroupStage>>
     {
         private readonly ILeagueQueryService leagueQueryService;
-        private readonly ILeagueCommandService leagueCommandService;
 
         public LeagueHandler(
-            ILeagueQueryService leagueQueryService,
-            ILeagueCommandService leagueCommandService)
+            ILeagueQueryService leagueQueryService)
         {
             this.leagueQueryService = leagueQueryService;
-            this.leagueCommandService = leagueCommandService;
         }
 
         public Task<IEnumerable<League>> Handle(MajorLeaguesRequest request, CancellationToken cancellationToken)
@@ -49,8 +45,5 @@ namespace Soccer.API.Leagues
 
         public Task<IEnumerable<LeagueGroupStage>> Handle(LeagueGroupsRequest request, CancellationToken cancellationToken)
             => leagueQueryService.GetLeagueGroups(request.LeagueId, request.SeasonId, request.Language);
-
-        public Task<bool> Handle(UpdateLeagueAbbreviationRequest request, CancellationToken cancellationToken)
-            => leagueCommandService.UpdateLeagueAbbreviation();
     }
 }
