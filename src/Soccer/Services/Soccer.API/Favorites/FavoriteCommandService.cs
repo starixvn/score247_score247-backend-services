@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Fanex.Data.Repository;
 using Fanex.Logging;
 using Soccer.Core.Models.Favorites;
@@ -26,7 +27,7 @@ namespace Soccer.API.Favorites
 
         public Task<int> AddFavorite(UserFavorite userFavorite)
         {
-            logger.Info($"AddFavorite user {userFavorite.UserId} - device {userFavorite.DeviceId} ");
+            logger.Info($"{DateTime.Now} AddFavorite user {userFavorite.UserId} - device {userFavorite.DeviceId} ");
 
             return dynamicRepository.ExecuteAsync(new InsertOrUpdateFavoriteCommand(userFavorite));
         }
@@ -34,7 +35,7 @@ namespace Soccer.API.Favorites
 
         public Task<int> RemoveFavorite(UserFavorite userFavorite)
         {
-            logger.Info($"RemoveFavorite user {userFavorite.UserId} - device {userFavorite.DeviceId} ");
+            logger.Info($"{DateTime.Now} RemoveFavorite user {userFavorite.UserId} - device {userFavorite.DeviceId} ");
 
             return dynamicRepository.ExecuteAsync(new RemoveFavoriteCommand(userFavorite));
         }
