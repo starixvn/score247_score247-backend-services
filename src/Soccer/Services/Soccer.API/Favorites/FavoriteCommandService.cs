@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Fanex.Data.Repository;
+using Fanex.Logging;
 using Soccer.Core.Models.Favorites;
 using Soccer.Database.Favorites.Commands;
 
@@ -15,14 +16,27 @@ namespace Soccer.API.Favorites
     public class FavoriteCommandService : IFavoriteCommandService
     {
         private readonly IDynamicRepository dynamicRepository;
+        private readonly ILogger logger;
 
-        public FavoriteCommandService(IDynamicRepository dynamicRepository)
-        => this.dynamicRepository = dynamicRepository;
+        public FavoriteCommandService(IDynamicRepository dynamicRepository, ILogger logger)
+        {
+            this.dynamicRepository = dynamicRepository;
+            this.logger = logger;
+        }
 
         public Task<int> AddFavorite(UserFavorite userFavorite)
-        => dynamicRepository.ExecuteAsync(new InsertOrUpdateFavoriteCommand(userFavorite));
+        {
+            logger.Info($"AddFavorite user {userFavorite.UserId} - device {userFavorite.DeviceId} ");
+
+            return dynamicRepository.ExecuteAsync(new InsertOrUpdateFavoriteCommand(userFavorite));
+        }
+
 
         public Task<int> RemoveFavorite(UserFavorite userFavorite)
-         => dynamicRepository.ExecuteAsync(new RemoveFavoriteCommand(userFavorite));
+        {
+            logger.Info($"RemoveFavorite user {userFavorite.UserId} - device {userFavorite.DeviceId} ");
+
+            return dynamicRepository.ExecuteAsync(new RemoveFavoriteCommand(userFavorite));
+        }
     }
 }
