@@ -6,6 +6,7 @@ using AutoFixture;
 using FakeItEasy;
 using Fanex.Caching;
 using Fanex.Data.Repository;
+using Fanex.Logging;
 using NSubstitute;
 using Score247.Shared;
 using Score247.Shared.Tests;
@@ -45,7 +46,9 @@ namespace Soccer.API.Tests.Matches
             appSettings.MatchShortCacheTimeDuration.Returns(1);
             appSettings.MatchLongCacheTimeDuration.Returns(2);
 
-            matchQueryService = new MatchQueryService(dynamicRepository, cacheManager, appSettings, currentTimeFunc);
+            var logger = Substitute.For<ILogger>();
+
+            matchQueryService = new MatchQueryService(dynamicRepository, cacheManager, appSettings, currentTimeFunc, logger);
         }
 
         [Fact]
