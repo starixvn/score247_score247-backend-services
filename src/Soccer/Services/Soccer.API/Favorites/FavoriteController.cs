@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using Score247.Shared.Enumerations;
 using Soccer.API.Favorites.Models;
 using Soccer.API.Favorites.Requests;
-using Soccer.Core._Shared.Enumerations;
 using Soccer.Core.Models.Favorites;
 using Soccer.Core.Shared.Enumerations;
 
