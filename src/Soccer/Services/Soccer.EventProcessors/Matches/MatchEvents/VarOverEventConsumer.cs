@@ -49,21 +49,27 @@
 
         private async Task PublishDefaultVarOverEventCommentary(MatchEvent matchEvent)
         {
-            if (matchEvent.Timeline.Type == EventType.VarOver)
+            var canGetTimelineId = long.TryParse(matchEvent.Timeline.Id, out var timelineId);
+            if (!canGetTimelineId)
             {
-                var canGetTimelineId = long.TryParse(matchEvent.Timeline.Id, out var timelineId);
-                if (!canGetTimelineId)
-                {
-                    return;
-                }
+                return;
+            }
 
+            TimelineCommentary commentary;
+            if (matchEvent.Timeline.Commentaries?.Any() == true)
+            {
+                commentary = new TimelineCommentary(timelineId, matchEvent.Timeline.Commentaries.ToList());
+            }
+            else
+            {
                 var match = await GetAndCacheMatchAsync(matchEvent.MatchId);
                 var teamName = match.Teams.FirstOrDefault(team => team.IsHome == matchEvent.Timeline.IsHome)?.Name;
                 var comment = new Commentary($"{languageResources.GetString(matchEvent.Timeline.Outcome.DisplayName)} {teamName}");
-                var commentary = new TimelineCommentary(timelineId, new List<Commentary> { comment });
-                await messageBus.Publish<IMatchCommentaryFetchedMessage>(
-                        new MatchCommentaryFetchedMessage(matchEvent.LeagueId, matchEvent.MatchId, commentary, Language.en_US, matchEvent.EventDate));
+                commentary = new TimelineCommentary(timelineId, new List<Commentary> { comment });
             }
+
+            await messageBus.Publish<IMatchCommentaryFetchedMessage>(
+                    new MatchCommentaryFetchedMessage(matchEvent.LeagueId, matchEvent.MatchId, commentary, Language.en_US, matchEvent.EventDate));
         }
 
         //TODO Remove Duplicate Code In ReceiveMatchNotificationConsumer

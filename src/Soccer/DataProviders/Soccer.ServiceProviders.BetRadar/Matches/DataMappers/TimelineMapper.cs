@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Score247.Shared.Enumerations;
 using Soccer.Core._Shared.Enumerations;
 using Soccer.Core.Matches.Models;
@@ -41,7 +42,7 @@ namespace Soccer.DataProviders.SportRadar.Matches.DataMappers
                 timelineDto.injury_time_announced,
                 GetOutcome(timelineDto.outcome),
                 GetDescription(timelineDto.description),
-                Enumerable.Empty<Commentary>(),
+                GetTimelineCommentary(timelineDto),
                 GetPlayer(timelineDto.player_out),
                 GetPlayer(timelineDto.player_in));
 
@@ -93,6 +94,11 @@ namespace Soccer.DataProviders.SportRadar.Matches.DataMappers
                     : new TimelineCommentary(
                         timelineDto.id,
                         timelineDto.commentaries.Select(x => new Commentary(x.text)).ToList());
+
+        public static IEnumerable<Commentary> GetTimelineCommentary(TimelineDto timelineDto)
+            => timelineDto.commentaries == null
+                    ? Enumerable.Empty<Commentary>()
+                    : timelineDto.commentaries.Select(x => new Commentary(x.text));
 
         public static int ParseMatchClock(string matchClock)
              => string.IsNullOrWhiteSpace(matchClock)
