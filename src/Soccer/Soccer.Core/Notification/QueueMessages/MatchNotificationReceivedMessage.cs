@@ -12,8 +12,6 @@ namespace Soccer.Core.Notification.QueueMessages
         TimelineEvent Timeline { get; }
 
         MatchResult MatchResult { get; }
-
-        DateTimeOffset EventDate { get; }
     }
 
     public class MatchNotificationReceivedMessage : IMatchNotificationReceivedMessage
@@ -22,14 +20,12 @@ namespace Soccer.Core.Notification.QueueMessages
             string matchId, 
             string leagueId, 
             TimelineEvent timeline, 
-            MatchResult matchResult, 
-            DateTimeOffset eventDate) 
+            MatchResult matchResult) 
         {
             MatchId = matchId;
             LeagueId = leagueId;
             Timeline = timeline;
             MatchResult = matchResult;
-            EventDate = eventDate;
         }
 
         public string MatchId { get; }
@@ -39,7 +35,5 @@ namespace Soccer.Core.Notification.QueueMessages
         public TimelineEvent Timeline { get; private set; }
 
         public MatchResult MatchResult { get; }
-
-        public DateTimeOffset EventDate { get; }
     }
 }

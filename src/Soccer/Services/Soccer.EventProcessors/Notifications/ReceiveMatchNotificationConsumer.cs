@@ -58,13 +58,14 @@ namespace Soccer.EventProcessors.Notifications
 
             //TODO group users by language
             var favoriteUserIds = await GetUserFavoriteIdsAsync(message.MatchId);
-            
-            if (favoriteUserIds?.Any() == false)
+            var match = await GetAndCacheMatchAsync(message.MatchId);
+
+            if (favoriteUserIds?.Any() == false || match == null)
             {
                 return;
             }
 
-            var notification = await GenerateTimelineNotificationAsync(message);
+            var notification = await GenerateTimelineNotificationAsync(message, match);
 
             if (notification == null)
             {
@@ -90,24 +91,14 @@ namespace Soccer.EventProcessors.Notifications
                        message.MatchId,
                        notification.Title(),
                        notification.Content(),
-                       message.EventDate,
+                       match.EventDate,
                        userIds: batchOfUsers
                    )));
             }
         }
 
-        private async Task<TimelineNotification> GenerateTimelineNotificationAsync(IMatchNotificationReceivedMessage message)
-        {
-            var match = await GetAndCacheMatchAsync(message.MatchId);
-
-            if (match == null)
-            {
-                await logger.InfoAsync($"ReceiveMatchNotificationConsumer NotFound match {message.MatchId}");
-
-                return default;
-            }
-
-            var notification = TimelineNotificationCreator.CreateInstance(
+        private async Task<TimelineNotification> GenerateTimelineNotificationAsync(IMatchNotificationReceivedMessage message, Match match)
+        => TimelineNotificationCreator.CreateInstance(
                 languageResources,
                 message.Timeline.Type,
                 message.Timeline,
@@ -115,9 +106,6 @@ namespace Soccer.EventProcessors.Notifications
                 match.Teams.FirstOrDefault(team => !team.IsHome),
                 message.Timeline.MatchTime,
                 message.MatchResult);
-
-            return notification;
-        }
 
         private async Task<string[]> GetUserFavoriteIdsAsync(string matchId)
         => (await dynamicRepository
