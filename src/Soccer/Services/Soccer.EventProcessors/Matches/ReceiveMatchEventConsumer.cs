@@ -46,8 +46,6 @@ namespace Soccer.EventProcessors.Matches
         {
             var matchEvent = context.Message?.MatchEvent;
 
-            await logger.InfoAsync($"Received match event : {Newtonsoft.Json.JsonConvert.SerializeObject(matchEvent)}");
-
             if (matchEvent?.Timeline.IsScoreChangeInPenalty() != false)
             {
                 return;
@@ -93,7 +91,6 @@ namespace Soccer.EventProcessors.Matches
 
             if (matchEvent.Timeline.Type.IsVarOver())
             {
-                await logger.InfoAsync($"Received var over event");
                 await messageBus.Publish<IVarOverEventMessage>(new VarOverEventMessage(matchEvent));
             }
 
