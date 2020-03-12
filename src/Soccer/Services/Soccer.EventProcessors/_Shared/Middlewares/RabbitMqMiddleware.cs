@@ -40,6 +40,7 @@
                 serviceCollectionConfigurator.AddConsumer<CardEventConsumer>();
                 serviceCollectionConfigurator.AddConsumer<PenaltyEventConsumer>();
                 serviceCollectionConfigurator.AddConsumer<PeriodStartEventConsumer>();
+                serviceCollectionConfigurator.AddConsumer<VarOverEventConsumer>();
                 serviceCollectionConfigurator.AddConsumer<BreakStartEventConsumer>();
                 serviceCollectionConfigurator.AddConsumer<ReceiveMatchEventConsumer>();
                 serviceCollectionConfigurator.AddConsumer<ProcessMatchEventConsumer>();
@@ -144,6 +145,14 @@
                     e.UseMessageRetry(RetryAndLogError(services));
 
                     e.Consumer<PenaltyEventConsumer>(provider);
+                });
+
+                cfg.ReceiveEndpoint(host, $"{messageQueueSettings.QueueName}_MatchEvents_VarOver", e =>
+                {
+                    e.PrefetchCount = PrefetchCount;
+                    e.UseMessageRetry(RetryAndLogError(services));
+
+                    e.Consumer<VarOverEventConsumer>(provider);
                 });
 
                 cfg.ReceiveEndpoint(host, $"{messageQueueSettings.QueueName}_LiveMatches", e =>
