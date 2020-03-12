@@ -20,7 +20,8 @@ namespace Soccer.NotificationServices.OneSignal.Matches.DataMappers
             {
                   { "id", eventNotification.MatchId },
                   { nameof(eventNotification.SportId), eventNotification.SportId.ToString() },
-                  { "type", NotificationType.MatchValue.ToString() }
+                  { "type", NotificationType.MatchValue.ToString() },
+                  { nameof(eventNotification.EventDate), eventNotification.EventDate.ToString() }
             }
         };
     }

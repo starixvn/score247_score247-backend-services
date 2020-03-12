@@ -90,6 +90,7 @@ namespace Soccer.EventProcessors.Notifications
                        message.MatchId,
                        notification.Title(),
                        notification.Content(),
+                       message.EventDate,
                        userIds: batchOfUsers
                    )));
             }

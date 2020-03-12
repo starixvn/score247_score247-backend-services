@@ -63,7 +63,8 @@ namespace Soccer.EventProcessors.Matches
                     matchEvent.MatchId,
                     matchEvent.LeagueId,
                     matchEvent.Timeline,
-                    matchEvent.MatchResult));
+                    matchEvent.MatchResult,
+                    matchEvent.EventDate));
             }
         }
     }

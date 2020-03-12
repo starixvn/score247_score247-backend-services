@@ -1,10 +1,11 @@
-﻿using Score247.Shared.Enumerations;
+﻿using System;
+using Score247.Shared.Enumerations;
 
 namespace Soccer.Core.Notification.Models
 {
     public class MatchEventNotification
     {
-        public MatchEventNotification(string matchId, string title, string content, string[] userIds = null, bool isIOS = true) 
+        public MatchEventNotification(string matchId, string title, string content, DateTimeOffset eventDate, string[] userIds = null, bool isIOS = true) 
         {
             SportId = Sport.Soccer.Value;
             MatchId = matchId;
@@ -12,6 +13,7 @@ namespace Soccer.Core.Notification.Models
             Content = content;
             UserIds = userIds;
             IsIOS = isIOS;
+            EventDate = eventDate;
         }
 
         public string MatchId { get; }
@@ -21,6 +23,8 @@ namespace Soccer.Core.Notification.Models
         public string Content { get; }
 
         public byte SportId { get; }
+
+        public DateTimeOffset EventDate { get; }
 
         public string[] UserIds { get; } 
 
