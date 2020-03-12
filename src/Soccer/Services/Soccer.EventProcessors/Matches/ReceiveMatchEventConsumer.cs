@@ -46,6 +46,8 @@ namespace Soccer.EventProcessors.Matches
         {
             var matchEvent = context.Message?.MatchEvent;
 
+            await logger.InfoAsync($"Received match event : {matchEvent}");
+
             if (matchEvent?.Timeline.IsScoreChangeInPenalty() != false)
             {
                 return;
