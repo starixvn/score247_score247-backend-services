@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Fanex.Caching;
 using Fanex.Data.Repository;
-using Fanex.Logging;
 using Score247.Shared;
 using Soccer.API.Matches.Helpers;
 using Soccer.API.Matches.Models;
@@ -50,20 +49,17 @@ namespace Soccer.API.Matches
         private readonly ICacheManager cacheManager;
         private readonly IAppSettings appSettings;
         private readonly Func<DateTimeOffset> dateTimeNowFunc;
-        private readonly ILogger logger;
 
         public MatchQueryService(
             IDynamicRepository dynamicRepository,
             ICacheManager cacheManager,
             IAppSettings appSettings,
-            Func<DateTimeOffset> dateTimeNowFunc,
-            ILogger logger)
+            Func<DateTimeOffset> dateTimeNowFunc)
         {
             this.dynamicRepository = dynamicRepository;
             this.cacheManager = cacheManager;
             this.appSettings = appSettings;
             this.dateTimeNowFunc = dateTimeNowFunc;
-            this.logger = logger;
         }
 
         public async Task<IEnumerable<MatchSummary>> GetLive(Language language)
@@ -261,8 +257,6 @@ namespace Soccer.API.Matches
 
         private async Task<MatchInfo> GetAndCacheMatchInfo(string id, Language language, DateTimeOffset eventDate)
         {
-            await logger.InfoAsync($"GetAndCacheMatchInfo {id} {eventDate.ToLocalTime()}");
-
             var match = await dynamicRepository.GetAsync<Match>(new GetMatchTimelineEventsCriteria(id, language, eventDate));
 
             if (match == null)

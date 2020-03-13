@@ -1,7 +1,6 @@
 ﻿namespace Soccer.EventPublishers.Matches
 {
     using System.Threading.Tasks;
-    using Fanex.Logging;
     using MassTransit;
     using Microsoft.AspNetCore.SignalR;
     using Newtonsoft.Json;
@@ -14,12 +13,10 @@
     public class ProcessMatchEventPublisher : IConsumer<IMatchEventProcessedMessage>
     {
         private readonly IHubContext<SoccerHub> hubContext;
-        private readonly ILogger logger;
 
-        public ProcessMatchEventPublisher(IHubContext<SoccerHub> hubContext, ILogger logger)
+        public ProcessMatchEventPublisher(IHubContext<SoccerHub> hubContext)
         {
             this.hubContext = hubContext;
-            this.logger = logger;
         }
 
         public async Task Consume(ConsumeContext<IMatchEventProcessedMessage> context)
@@ -32,7 +29,6 @@
 
                 const string matchEventName = "MatchEvent";
                 await hubContext.Clients.All.SendAsync(matchEventName, message);
-                await logger.InfoAsync("Send Match Event: \r\n" + message);
             }
         }
     }

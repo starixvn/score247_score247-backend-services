@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Fanex.Logging;
 using MassTransit;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
@@ -13,12 +12,10 @@ namespace Soccer.EventPublishers.Matches
     public class UpdateLiveMatchPublisher : IConsumer<ILiveMatchUpdatedMessage>
     {
         private readonly IHubContext<SoccerHub> hubContext;
-        private readonly ILogger logger;
 
-        public UpdateLiveMatchPublisher(IHubContext<SoccerHub> hubContext, ILogger logger)
+        public UpdateLiveMatchPublisher(IHubContext<SoccerHub> hubContext)
         {
             this.hubContext = hubContext;
-            this.logger = logger;
         }
 
         public async Task Consume(ConsumeContext<ILiveMatchUpdatedMessage> context)
@@ -33,7 +30,6 @@ namespace Soccer.EventPublishers.Matches
                     new LiveMatchSignalRMessage(Sport.Soccer.Value, newMatches, removedMatches));
 
                 await hubContext.Clients.All.SendAsync("LiveMatches", signalRMessage);
-                await logger.InfoAsync("Send Live Matches: \r\n" + signalRMessage);
             }
         }
     }

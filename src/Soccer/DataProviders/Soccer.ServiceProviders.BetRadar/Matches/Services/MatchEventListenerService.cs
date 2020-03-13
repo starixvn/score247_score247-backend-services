@@ -69,7 +69,6 @@ namespace Soccer.DataProviders.SportRadar.Matches.Services
                 if (retryCount < MaxRetryTimes)
                 {
                     await Task.Delay(MillisecondsTimeout, cancellationToken);
-                    await logger.InfoAsync($"Region: {region.Name}, Retry {retryCount} time for event listener at {DateTime.Now}");
                     await ListenEvents(handler, cancellationToken);
                 }
             }
@@ -82,8 +81,6 @@ namespace Soccer.DataProviders.SportRadar.Matches.Services
                 await ProcessRegionStream(regionName, key, handler);
 
                 await Task.Delay(MillisecondsTimeout, cancellationToken);
-
-                await logger.InfoAsync($"{DateTime.Now} - Region {regionName} reconnect after end of stream");
             }
         }
 
@@ -115,8 +112,6 @@ namespace Soccer.DataProviders.SportRadar.Matches.Services
             var reply = (HttpWebResponse)req.GetResponse();
             var stream = reply.GetResponseStream();
             var reader = new StreamReader(stream);
-
-            await logger.InfoAsync($"start listen {formattedEndpoint}");
 
             return new KeyValuePair<string, StreamReader>(regionName, reader);
         }

@@ -47,26 +47,18 @@ namespace Soccer.DataReceivers.EventListeners.Matches
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            await logger.InfoAsync($"MatchEventListener {eventListenerService.Name} is starting at {DateTime.Now}");
-
             await ListenMatchEvents(stoppingToken);
-
-            await logger.InfoAsync($"MatchEventListener {eventListenerService.Name} is stopping at {DateTime.Now}");
         }
 
         public override async Task StartAsync(CancellationToken cancellationToken)
         {
             MajorLeagues = await internalLeagueService.GetLeagues(Language.en_US);
 
-            await logger.InfoAsync($"Started Match Event Listener {eventListenerService.Name} at {DateTime.Now}");
-
             await base.StartAsync(cancellationToken);
         }
 
         public override async Task StopAsync(CancellationToken cancellationToken)
         {
-            await logger.InfoAsync($"Stop Match Event Listener {eventListenerService.Name} at {DateTime.Now}");
-
             await base.StopAsync(cancellationToken);
         }
 

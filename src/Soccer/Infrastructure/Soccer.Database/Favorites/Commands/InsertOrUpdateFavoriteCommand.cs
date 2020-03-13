@@ -9,8 +9,8 @@ namespace Soccer.Database.Favorites.Commands
         {
             SportId = Sport.Soccer.Value;
             UserId = userFavorite.UserId;
-            DeviceId = userFavorite.DeviceId;
-            PushService = userFavorite.PushService;
+            DeviceId = userFavorite.DeviceId ?? string.Empty;
+            PushService = userFavorite.PushService ?? string.Empty;
             Favorites = ToJsonString(userFavorite.Favorites);
         }
 

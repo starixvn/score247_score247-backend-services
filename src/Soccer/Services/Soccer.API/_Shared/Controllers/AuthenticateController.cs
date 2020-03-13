@@ -51,16 +51,11 @@ namespace Soccer.API._Shared.Controllers
 
             try
             {
-                var decryptedUserId = cryptographyHelper.Decrypt(encryptedInfo, appSettings.EncryptKey);
-
-                if (decryptedUserId != userId)
-                {
-                    await logger.InfoAsync($"Failed decrypted user {userId}, decrypted user {decryptedUserId}");
-                }
+                cryptographyHelper.Decrypt(encryptedInfo, appSettings.EncryptKey);
             }
             catch (Exception ex)
             {
-                await logger.InfoAsync($"Failed decrypted user {userId}, encrypted info {encryptedInfo} {ex.ToString()}");
+                await logger.ErrorAsync($"Failed decrypted user {userId}, encrypted info {encryptedInfo} {ex.ToString()}");
             }
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -75,8 +70,6 @@ namespace Soccer.API._Shared.Controllers
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
-
-            await logger.InfoAsync($"Grant Token for user {userId}, token {token}");
 
             return token;
         }

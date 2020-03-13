@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
-using Fanex.Logging;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Soccer.DataReceivers.ScheduleTasks._Shared.HealthCheck
@@ -14,16 +11,14 @@ namespace Soccer.DataReceivers.ScheduleTasks._Shared.HealthCheck
     {
         private const int maxExpiredMinutes = 5;
         private readonly IHealthCheckService healthCheckService;
-        private readonly ILogger logger;
 
-        public HealthCheckController(IHealthCheckService healthCheckService, ILogger logger)
+        public HealthCheckController(IHealthCheckService healthCheckService)
         {
             this.healthCheckService = healthCheckService;
-            this.logger = logger;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public IActionResult Get()
         {
             var latestHeartbeat = healthCheckService.LatestHeartBeats();
             var jobsStatus = latestHeartbeat
@@ -38,8 +33,6 @@ namespace Soccer.DataReceivers.ScheduleTasks._Shared.HealthCheck
                 "<br />",
                 jobsStatus.Select(region =>
                     $"Job Name: {region.Key} --- Last Health Check: {region.Value} --- Is Alive: {region.Item3}"));
-
-            await logger.InfoAsync("Enter Health Check");
 
             return new ContentResult
             {

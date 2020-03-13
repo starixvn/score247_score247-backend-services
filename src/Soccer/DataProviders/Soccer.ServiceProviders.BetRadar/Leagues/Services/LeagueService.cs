@@ -163,11 +163,7 @@ namespace Soccer.DataProviders.SportRadar.Leagues.Services
             }
             catch (ApiException ex)
             {
-                if (ex.StatusCode == HttpStatusCode.NotFound)
-                {
-                    await logger.InfoAsync($"{leagueInfo} Message:{ex.Message}\r\nUrl:{ex.Uri}", ex);
-                }
-                else
+                if (ex.StatusCode != HttpStatusCode.NotFound)                
                 {
                     await logger.ErrorAsync($"{leagueInfo} Url:{ex.Uri}\r\nMessage:{ex}");
                 }
@@ -215,7 +211,7 @@ namespace Soccer.DataProviders.SportRadar.Leagues.Services
             }
             catch (ApiException ex)
             {
-                await logger.WarnAsync($"Tournament not found: {leagueId} + {ex.Content}");
+                await logger.ErrorAsync($"Tournament not found: {leagueId} + {ex.Content}");
 
                 return null;
             }

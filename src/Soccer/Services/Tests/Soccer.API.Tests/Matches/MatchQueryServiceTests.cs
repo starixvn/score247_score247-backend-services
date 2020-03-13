@@ -46,9 +46,7 @@ namespace Soccer.API.Tests.Matches
             appSettings.MatchShortCacheTimeDuration.Returns(1);
             appSettings.MatchLongCacheTimeDuration.Returns(2);
 
-            var logger = Substitute.For<ILogger>();
-
-            matchQueryService = new MatchQueryService(dynamicRepository, cacheManager, appSettings, currentTimeFunc, logger);
+            matchQueryService = new MatchQueryService(dynamicRepository, cacheManager, appSettings, currentTimeFunc);
         }
 
         [Fact]

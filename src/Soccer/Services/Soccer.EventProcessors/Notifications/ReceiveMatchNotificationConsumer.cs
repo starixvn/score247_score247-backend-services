@@ -65,11 +65,11 @@ namespace Soccer.EventProcessors.Notifications
                 return;
             }
 
-            var notification = await GenerateTimelineNotificationAsync(message, match);
+            var notification = GenerateTimelineNotification(message, match);
 
             if (notification == null)
             {
-                await logger.InfoAsync($"ReceiveMatchNotificationConsumer NotSupported {message.Timeline.Type.DisplayName}");
+                await logger.ErrorAsync($"ReceiveMatchNotificationConsumer NotSupported {message.Timeline.Type.DisplayName}");
 
                 return;
             }
@@ -97,7 +97,7 @@ namespace Soccer.EventProcessors.Notifications
             }
         }
 
-        private async Task<TimelineNotification> GenerateTimelineNotificationAsync(IMatchNotificationReceivedMessage message, Match match)
+        private TimelineNotification GenerateTimelineNotification(IMatchNotificationReceivedMessage message, Match match)
         => TimelineNotificationCreator.CreateInstance(
                 languageResources,
                 message.Timeline.Type,

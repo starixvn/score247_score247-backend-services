@@ -1,7 +1,6 @@
 ﻿namespace Soccer.EventPublishers.Teams
 {
     using System.Threading.Tasks;
-    using Fanex.Logging;
     using MassTransit;
     using Microsoft.AspNetCore.SignalR;
     using Newtonsoft.Json;
@@ -13,12 +12,10 @@
     public class UpdateTeamStatisticPublisher : IConsumer<ITeamStatisticUpdatedMessage>
     {
         private readonly IHubContext<SoccerHub> hubContext;
-        private readonly ILogger logger;
 
-        public UpdateTeamStatisticPublisher(IHubContext<SoccerHub> hubContext, ILogger logger)
+        public UpdateTeamStatisticPublisher(IHubContext<SoccerHub> hubContext)
         {
             this.hubContext = hubContext;
-            this.logger = logger;
         }
 
         public async Task Consume(ConsumeContext<ITeamStatisticUpdatedMessage> context)
@@ -36,8 +33,6 @@
 
             const string TeamStatisticName = "TeamStatistic";
             await hubContext.Clients.All.SendAsync(TeamStatisticName, message);
-
-            await logger.InfoAsync("Send Team Statistic: \r\n" + message);
         }
     }
 }
